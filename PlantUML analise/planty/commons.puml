@@ -1,0 +1,11 @@
+' File: commons.puml
+ 
+' section with id user to define user actor
+@startuml(id=user)
+actor "Application User" as User
+@enduml
+ 
+' section with id mail to define mail component
+@startuml(id=mail)
+[Mail server] as Mail <<Mail>> #ffcc66
+@enduml

@@ -1,0 +1,44 @@
+wojewodztwa = ('dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'łódzkie', 'małopolskie', 'mazowieckie',
+'opolskie', 'podkarpackie', 'podlaskie', 'pomorskie', 'śląskie', 'świętokrzyskie', 'warmińsko-mazurskie', 'wielkopolskie',
+'zachodniopomorskie')
+wojSet = []
+
+for w in wojewodztwa:   
+    pos = {'wojewodztwo':w, 'max': [] , 'maxLen':0,  'set': set(w) }
+    wojSet.append( pos )
+
+path = 'D:\\Programowanie\\GIT_Python\\python\\slowa\odm.txt'
+
+debug = True
+
+def sprSlowo(slowo, pos):
+    global wojSet
+    sloLen = len(slowo)
+    if sloLen < wojSet[pos]['maxLen']:
+        return
+    sl = set(slowo)
+    if (sl & wojSet[pos]['set']) == set():
+        if sloLen > wojSet[pos]['maxLen']:
+            wojSet[pos]['max'] = [slowo]
+            wojSet[pos]['maxLen'] = sloLen
+        else:
+            wojSet[pos]['max'].append(slowo)
+
+        if debug:    
+            print('{} | {}'.format(wojSet[pos]['wojewodztwo'], wojSet[pos]['max']))
+
+
+with open(path, encoding='UTF-8') as plik:
+     while True:
+        line = plik.readline()
+        line = line.rstrip()
+        if not line :
+            break
+        for slowo in line.split(','):
+            slowo = slowo.replace(' ','').lower()
+            for x in range(len(wojSet)):
+                sprSlowo(slowo,x)
+
+print('-----------------------------------')
+for pos in wojSet:
+    print('{}\t\t| {} | [{}]'.format(pos['wojewodztwo'],  pos['max'], pos['maxLen']))
