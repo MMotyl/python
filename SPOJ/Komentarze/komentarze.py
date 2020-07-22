@@ -14,14 +14,14 @@ def checkLine(line):
         tmpComment = True        
     if (line.find('*/')!= -1 ) and (line.find('/*')!= -1):
         tmpComment = True
-        print('')
+        print(' ')
     if not (groupComment or tmpComment):
         print(line.split('//')[0])
 
 #for poz in fileinput.input():
 #    checkLine(line)
 
-path = 'D:\\Programowanie\\GIT_Python\\python\\SPOJ\\Komentarze\\dane.txt'
+path = 'D:\\Programowanie\\GIT_Python\\python\\SPOJ\\Komentarze\\dane2.txt'
 with open(path, encoding='UTF-8') as plik:
      while True:
         line = plik.readline()

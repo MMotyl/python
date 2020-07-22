@@ -20,7 +20,7 @@ void gen(int x)
 int main()
 {
         int a, d, n;
-        cin >> a; srand(a); 
+        cin >> a; srand(a);
 
         cin >> d; cin >> n; cout << n << endl;
         for(;n;n--)

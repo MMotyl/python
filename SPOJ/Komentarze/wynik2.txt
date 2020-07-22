@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _road{
+    int cost;
+    int from,to;
+    struct _road *next;
+}road;
+
+int readInt(void);
+inline int roadcmp(const void *a,const void *b){
+    return ((road*)a)->cost-((road*)b)->cost;
+};
+
+inline void swap(road *a,road *b){
+
+    road tmp=*a;
+    *a=*b;
+    *b=tmp;
+};
+
+void Heapify(road *A,int n, int i);
+void BuildHeap(road *A,int n);
+void HeapSort(road *A,int n);
+
+int city[10000];
+int main(){}
