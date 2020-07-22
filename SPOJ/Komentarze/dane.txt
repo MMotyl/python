@@ -1,4 +1,3 @@
-cin >> a; srand(a);
 #define R(p) rand()%('9'-(p)+1)+(p) // makropolecenie
 #define P(p) putc((p),stdout)
 #define PP(p) P(R(p)) // makropolecenia zagnieżdżone
