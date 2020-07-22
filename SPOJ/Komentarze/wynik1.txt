@@ -1,5 +1,5 @@
-#define R(p) rand()%('9'-(p)+1)+(p) 
-#define P(p) putc((p),stdout)        
+#define R(p) rand()%('9'-(p)+1)+(p)
+#define P(p) putc((p),stdout)
 #define PP(p) P(R(p))
 
 #include <iostream>
@@ -8,7 +8,6 @@
 #include <cstdio>
 
 using namespace std;
-
 
 
 void gen(int x)
@@ -21,7 +20,6 @@ int main()
 {
         int a, d, n;
         cin >> a; srand(a);
-
         cin >> d; cin >> n; cout << n << endl;
         for(;n;n--)
         {
