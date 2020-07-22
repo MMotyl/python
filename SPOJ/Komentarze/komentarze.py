@@ -5,9 +5,10 @@ groupComment = False
 def checkLine(line):
     global groupComment
     tmpComment = False
-    line = line.rstrip()
-    if line.find('/*')!= -1:
+    line = line.replace('\n','')
+    if not groupComment and (line.find('/*')!= -1):
         groupComment = True
+        print(line.split('/*')[0])
     if groupComment & (line.find('*/')!= -1):
         groupComment = False
         tmpComment = True        
