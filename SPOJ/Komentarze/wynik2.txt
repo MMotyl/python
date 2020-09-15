@@ -14,7 +14,6 @@ inline int roadcmp(const void *a,const void *b){
 
 inline void swap(road *a,road *b){
 
-
     road tmp=*a;
     *a=*b;
     *b=tmp;
