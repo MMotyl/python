@@ -8,6 +8,7 @@ Operation = Enum('Operation', 'GET HEAD')
 
 request_payload = ''
 request_headers = {}
+req_timeout = 1
 
 def cleanURL(url):
     prot = Protocol.none #assumed protocol
@@ -31,9 +32,9 @@ def splitURL(url):
 
 def CallURL(data, operation = Operation.HEAD, prot = Protocol.https):
     if prot.name == Protocol.http.name:
-        conn = http.client.HTTPConnection(data['host'])
+        conn = http.client.HTTPConnection(data['host'],timeout=req_timeout)
     else:
-        conn = http.client.HTTPSConnection(data['host'])
+        conn = http.client.HTTPSConnection(data['host'],timeout=req_timeout)
 
     try:    
         conn.request(operation.name , data['path'], request_payload, request_headers)
@@ -54,17 +55,21 @@ def CallURL(data, operation = Operation.HEAD, prot = Protocol.https):
             status["redirectedToHTTPS"] ='-' #does not apply
     except:    
         status  = {
-            "protocol": prot,  
+            "protocol": prot.name,  
             "HTTPStatus": 'ERR!', 
             "redirectedTo":"",
             "redirectedToHTTPS" :""}
 
-    
+    data[prot.name+'Status'] = status
     data["statuses"].append(status)
 
     return data
 
 def CheckHTTPSRedirect(url, redirect):
+    if url.find('http') ==-1 : # request może być bez prot.
+        url = 'http://'+url
+    if redirect[-1] =='/':
+        url = url+'/'
     res = url.replace('http://', 'https://') == redirect
     if res:
         return "Y"
@@ -97,10 +102,10 @@ def checkURL(url, protocol = Protocol.https, operation = Operation.HEAD, tryOthe
            try_protocol = Protocol.http
 
         data = CallURL(data, operation, try_protocol)    
-    return json.dumps(data, indent=4, sort_keys=True)
+    return data #json.dumps(data, indent=4, sort_keys=True)
 
-data = checkURL('assistancewpodrozy.pl',operation=Operation.GET, tryOtherProt=True)    
-print(data)
+#data = checkURL('assistancewpodrozy.pl',operation=Operation.GET, tryOtherProt=True)    
+#print(data)
 
 # http://assistancewpodrozy.pl
 # 'https://www.axadirect.pl/kalkulator/assistance-w-podrozy/insurance'
