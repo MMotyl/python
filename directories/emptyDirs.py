@@ -1,11 +1,11 @@
 import os
 import sys
-import shutil
 from pathlib import Path
 
-rootdir = 'e:\\eBooki\\' #sys.argv[1]
-#rootdir = 'z:\\' #sys.argv[1]
-os.system('chcp 1250')
+if len(sys.argv) != 3:
+    rootdir = 'g:\\test\\' #
+else:
+    rootdir = sys.argv[1]
 
 for folder, subs, files in os.walk(rootdir):
     lx = len(files)
