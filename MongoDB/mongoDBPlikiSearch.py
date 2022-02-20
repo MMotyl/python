@@ -16,7 +16,10 @@ fields  = {"_id":0, "name":1, "path":1 } # które kolumny ma zwracać
 
 for x in mycol.find(myquery , fields):
   print(x)
-  
+
+#  https://docs.mongodb.com/manual/tutorial/query-documents/
+
+
 # find().sort("name")  
 # sort("name", 1) #ascending
 # sort("name", -1) #descending
